@@ -1,7 +1,6 @@
 <?php 
-
+include 'connect_db.php';
 $url= 'https://poloniex.com/public?command=returnTicker';
-
 //  Initiate curl
 $ch = curl_init();
 // Disable SSL verification
@@ -20,8 +19,13 @@ $ticker = json_decode($result, true);
 
 //loop through the array and print the values
 foreach($ticker as $value=>$pair){
-	print_r($value);
-	echo '<br>';
-	print_r($pair);
-	echo '<br>';
+	$ins = "INSERT INTO `Ticker`(`pair`, `last`) VALUES ('$value','$pair[last]')";
+	if($conn->query($ins) === TRUE){
+			print_r($value);
+			echo '<br>';
+			print_r($pair);
+			echo '<br>';
+	}else{
+		echo "Error: " . $ins . "<br>" . $conn->error;
+	};
 }
