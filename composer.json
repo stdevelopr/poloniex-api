@@ -1,0 +1,14 @@
+{
+    "name": "st/poloniex-api",
+    "description": "retrieves data from poloniex and stores it in a database",
+    "type": "project",
+    "authors": [
+        {
+            "name": "stdevelopr",
+            "email": "stdevelopr@gmail.com"
+        }
+    ],
+    "require": {
+        "curl/curl": "^1.9"
+    }
+}
