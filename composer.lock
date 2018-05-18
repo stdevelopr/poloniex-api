@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "518fedaa006d8a21e2459f11eebfe537",
+    "content-hash": "d608e92bf106954641423ee9e76acc53",
     "packages": [
         {
             "name": "curl/curl",
@@ -60,6 +60,50 @@
                 "dot"
             ],
             "time": "2018-05-02T16:32:35+00:00"
+        },
+        {
+            "name": "lupecode/php-trader-native",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LupeCode/phpTraderNative.git",
+                "reference": "d9902815d8be01d27ad3725bb1c77b71fdbf2e3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LupeCode/phpTraderNative/zipball/d9902815d8be01d27ad3725bb1c77b71fdbf2e3b",
+                "reference": "d9902815d8be01d27ad3725bb1c77b71fdbf2e3b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "~1.4.0",
+                "ext-trader": "0.4.1",
+                "phpmetrics/phpmetrics": "~2.3.2",
+                "phpunit/phpunit": "~6.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LupeCode\\phpTraderNative\\": "source/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Joshua Lopez",
+                    "email": "joshua@lupecode.com",
+                    "homepage": "http://github.com/jbsaige",
+                    "role": "Developer"
+                }
+            ],
+            "description": "An native version of the PHP Trader extension.",
+            "time": "2018-02-20T00:32:24+00:00"
         }
     ],
     "packages-dev": [],
