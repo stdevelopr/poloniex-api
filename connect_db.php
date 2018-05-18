@@ -42,8 +42,8 @@ if (mysqli_select_db($conn,'poloniex') === TRUE){
 	}
 	//Create the table
 	$tb = 'CREATE TABLE Ticker(
-	pair varchar(15) PRIMARY KEY,
-	last float NOT NULL
+	date_time varchar(15) PRIMARY KEY,
+	close float NOT NULL
 	)';
 
 	if ($conn->query($tb) === TRUE) {
