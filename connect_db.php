@@ -40,14 +40,14 @@ if (mysqli_select_db($conn,'poloniex') === TRUE){
     echo "Couldn't connect to database: " . $conn->error;
     echo '<br>';
 	}
-	//Create the table
-	$tb = 'CREATE TABLE Ticker(
-	date_time varchar(15) PRIMARY KEY,
-	close float NOT NULL
+	//Create a table containing the coins
+	$tb = 'CREATE TABLE Coins(
+	id int PRIMARY KEY AUTO_INCREMENT,
+	pair varchar(15) NOT NULL
 	)';
 
 	if ($conn->query($tb) === TRUE) {
-	    echo "Table Ticker created successfully";
+	    echo "Table Coins created successfully";
 	    echo '<br>';
 	} else {
 	    echo "Error creating table: " . $conn->error;
