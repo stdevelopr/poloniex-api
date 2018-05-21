@@ -41,38 +41,26 @@ if ($result->num_rows > 0) {
 		$get=curl_exec($ch);
 		//decode
 		$data = json_decode($get, true);
-		//echo
-		echo $pair;
-		echo '<br>';
-        print_r($data[0]);
-        echo '<br>';
-        print_r($data[1]);
-        echo '<br>';
-        flush();
+        //loop through the array
+        foreach ($data as $key => $value) {
+            $date = $value['date'];
+            $high = $value['high'];
+            $low = $value['low'];
+            $open = $value['open'];
+            $close = $value['close'];
+            $volume = $value['volume'];
+            $quoteVolume = $value['quoteVolume'];
+            $weightedAverage = $value['weightedAverage'];
+            $ins = "INSERT INTO Data (pair, date_time, high, low, open, close, volume, quoteVolume, weightedAverage) VALUES ('$pair', '$date', '$high', $low, $open, $close, $volume, $quoteVolume, $weightedAverage)";
+            if($conn->query($ins) === TRUE){
+                echo 'Adding '.$pair.' Date_time: '.$date.'<br>';
+            }
+        }
         usleep(500000);
     }
 } else {
-    echo "0 results";
+    echo "0 coins listed. Verify the table coins.";
 }
-
+echo 'Completed';
 // Closing
 curl_close($ch);
-
-
-// //loop through the array and print the values
-// foreach($ticker as $value=>$pair){
-// 	print_r($value);
-// 	echo '<br>';
-// 	print_r($pair['date']);
-// 	echo '<br>';
-// 	print_r($pair['close']);
-// 	$ins = "INSERT INTO `Ticker`(`date_time`, `close`) VALUES ('$pair[date]','$pair[close]')";
-// 	if($conn->query($ins) === TRUE){
-// 			print_r($value);
-// 			echo '<br>';
-// 			print_r($pair);
-// 			echo '<br>';
-// 	}else{
-// 		echo "Error: " . $ins . "<br>" . $conn->error;
-// 	};
-// }
