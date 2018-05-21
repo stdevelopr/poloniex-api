@@ -20,7 +20,7 @@ curl_close($ch);
 $ticker = json_decode($result, true);
 
 foreach($ticker as $value=>$pair){
-	$ins = "INSERT INTO `Coins`(`pair`) VALUES ('$value')";
+	$ins = "INSERT INTO Coins (pair) VALUES ('$value')";
 	if($conn->query($ins) === TRUE){
 			print_r($value);
 			echo '<br>';
