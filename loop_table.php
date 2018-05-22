@@ -53,29 +53,84 @@ $data = array(); //data array store the values(date_time, close) for each pair
 
 //Apply macd indicator
 foreach ($data as $key => $value) {
-	print_r($key);
+	$pair = $key;
 	$close = [];
 	foreach ($value as $key => $value2) {
 		array_push($close, $value2);
 	}
+
+	//enter the close values to macd
 	$macd_get = Trader::macd($close);
-	print_r($macd_get);
-	echo '<br>';
-	echo '<br>';
-}
+	// print_r($macd_get);
+	// echo '<br>';
+	// echo '<br>';
+
+	$values = $macd_get['MACDHist'];
+	$i=0;
+	$c=0;
+	for(end($values); key($values)!=null; prev($values)){
+			// print_r(current($values));
+			// echo '<br>';
+			if(current($values) >0 && $c==0){
+				// print_r(current($values));
+				// echo 'OK';
+				$i++;				
+			} elseif(current($values)<0 && $i==0){
+				// print_r(current($values));
+				// echo 'NEG';
+				// echo '<br>';
+				// echo '<br>';
+				$c++;
+
+			} elseif(current($values)<0 && $i!=0){
+				// print_r(current($values));
+				// echo 'FIM: '.$i*4;
+				// echo '<br>';
+				// echo '<br>';
+				break;
+			} elseif(current($values) >0 && $c!=0){
+				// print_r(current($values));
+				// echo 'FIM: '.$c;
+				// echo '<br>';
+				// echo '<br>';
+				break;
+			}
+			// echo '<br>';
+	}
+	if($i>0){
+		$status='positive';
+		$time = ($i*4).'hrs';
+	}else{
+		$status='negative';
+		$time =  ($c*4).'hrs';
+	}
+
+	echo 'Pair :'.$pair.'<br>';
+	echo 'MACD Signal: '.$status.'<br>';
+	echo 'Last Cross: '.$time;
+	echo '<br><br>';
 
 
 
-
-
-
-
-
-
-
-
-
-
+	// foreach ($macd_get as $key => $value) {
+	// 	print_r($value);
+	// 	echo '<br>';
+	// 	echo '<br>';
+	// 	echo '<br>';
+	// 	for(end($value); key($value)!=null; prev($value)){
+	// 		print_r(current($value));
+	// 		// echo '<br>';
+	// 		if(current($value) >0){
+	// 			echo 'OK';
+				
+	// 		}
+	// 		echo '<br>';
+	// 	}
+	// };
+	// // print_r(array_slice($macd_get['MACD'], -1));
+	// echo '<br>';
+	// echo '<br>';
+};
 
 $time_end = microtime(true);
 $execution_time = ($time_end - $time_start);
