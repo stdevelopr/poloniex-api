@@ -18,8 +18,6 @@ $result = $conn->query($sql);  //A variable $results has a collection of rows wh
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {  //the function fetch_assoc() fetch the first element from the collection.
-        print_r($row);
-        echo '<br>';
         $date_time[] = $row['date_time'];
         $formated_date[] = gmdate("Y-m-d\TH:i:s\Z", $row['date_time']);
         $high[] = $row['high'];
@@ -32,11 +30,19 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
-$size = sizeof($date_time);
 
-$ma= Trader::ma($date_time, $size/4);
-print_r($ma);
+//indicator
+$ma= Trader::ma($close, 30);
+$date_ma = [];
+foreach ($ma as $key => $value) {
+	$date_ma[$key] = $date_time[$key];
+}
+
+
+
 ?>
+
+
 
 <head>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -45,61 +51,57 @@ print_r($ma);
 <!-- Plotly chart will be drawn inside this div -->
 <div id="graph"></div>
 <script>
-	var date_time= <?php echo json_encode($formated_date); ?>;
+	var date_time= <?php echo json_encode($date_time); ?>;
 	var close= <?php echo json_encode($close); ?>;
 	var high= <?php echo json_encode($high); ?>;
 	var low= <?php echo json_encode($low); ?>;
 	var open= <?php echo json_encode($open); ?>;
+	var ma= Object.values(<?php echo json_encode($ma); ?>);
+	var ma2= Object.values(<?php echo json_encode($date_ma); ?>);
 
-	var trace = {
-	  x: date_time,
-	  close: close,
-	  high: high,
-	  low: low,
-	  open: open,
+	var trace1 = {
+		x: date_time,
+		close: close,
+		high: high,
+		low: low,
+		open: open,
 
-	  // cutomise colors
-	  increasing: {line: {color: 'black'}},
-	  decreasing: {line: {color: 'red'}},
+		// cutomise colors
+		increasing: {line: {color: 'green'}},
+		decreasing: {line: {color: 'red'}},
 
-	  type: 'candlestick',
-	  xaxis: 'x',
-	  yaxis: 'y'
+		type: 'candlestick',
+		xaxis: 'x1',
+		yaxis: 'y1'
 	};
 
-	var trace = {
-	  x: date_time,
-	  close: close,
-	  high: high,
-	  low: low,
-	  open: open,
 
-	  // cutomise colors
-	  increasing: {line: {color: 'black'}},
-	  decreasing: {line: {color: 'red'}},
 
-	  type: 'candlestick',
-	  xaxis: 'x',
-	  yaxis: 'y'
-	};
+	var trace2= {
+	    x: ma2,
+	    y: ma,
+	    type: 'scatter',
+	    xaxis: 'x',
+	 	yaxis: 'y2'
+	  };
 
-	var data = [trace];
+	var data=[trace1, trace2];
 
 	var layout = {
-	  dragmode: 'zoom',
-	  showlegend: false,
-	  xaxis: {
-	    rangeslider: {
-	         visible: false
-	     }
-	  },
-	  yaxis: {
-	  	title: 'price',
-	  	exponentformat:'none',
-	  }
+	plot_bgcolor: 'white',
+	legend: {traceorder: 'reversed'},
+	dragmode: 'zoom',
+	showlegend: true,
+	xside: 'top plot',
+	xaxis: {domain: [0,1], rangeslider: {visible: false}, ticks:'outside', side: 'bottom', anchor: 'y2'},
+	yaxis: {domain: [0.5,1],title: 'price',exponentformat:'none',},
+	xaxis2: {domain: [0,1],rangeslider: {visible: false},ticks: 'outside',side: 'bottom', anchor: 'y2'},
+	yaxis2: {domain: [0,0.5],title: 'price',exponentformat:'none',},
 	};
 
+
 	Plotly.plot('graph', data, layout);
+
 </script>
 </body>
 </html>
