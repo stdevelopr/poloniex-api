@@ -38,7 +38,15 @@ foreach ($ma as $key => $value) {
 	$date_ma[$key] = $date_time[$key];
 }
 
+$macd_get = Trader::macd($close);
+$macd = $macd_get['MACD'];
+$macd_sig = $macd_get['MACDSignal'];
+$macd_hist = $macd_get['MACDHist'];
 
+// print_r($macd_macd);
+foreach ($macd as $key => $value) {
+	$date_macd[$key] = $date_time[$key];
+}
 
 ?>
 
@@ -57,7 +65,12 @@ foreach ($ma as $key => $value) {
 	var low= <?php echo json_encode($low); ?>;
 	var open= <?php echo json_encode($open); ?>;
 	var ma= Object.values(<?php echo json_encode($ma); ?>);
-	var ma2= Object.values(<?php echo json_encode($date_ma); ?>);
+	var date_ma= Object.values(<?php echo json_encode($date_ma); ?>);
+	var macd = Object.values(<?php echo json_encode($macd); ?>);
+	var macd_sig = Object.values(<?php echo json_encode($macd_sig); ?>);
+	var macd_hist = Object.values(<?php echo json_encode($macd_hist); ?>);
+	var date_macd = Object.values(<?php echo json_encode($date_macd); ?>);
+	console.log(macd);
 
 	var trace1 = {
 		x: date_time,
@@ -78,14 +91,38 @@ foreach ($ma as $key => $value) {
 
 
 	var trace2= {
-	    x: ma2,
+	    x: date_ma,
 	    y: ma,
+	    type: 'scatter',
+	    xaxis: 'x',
+	 	yaxis: 'y1'
+	  };
+
+	  	var trace3= {
+	    x: date_macd,
+	    y: macd,
 	    type: 'scatter',
 	    xaxis: 'x',
 	 	yaxis: 'y2'
 	  };
 
-	var data=[trace1, trace2];
+	  	 var trace4= {
+	    x: date_macd,
+	    y: macd_sig,
+	    type: 'scatter',
+	    xaxis: 'x',
+	 	yaxis: 'y2'
+	  };
+
+	  	var trace5= {
+	    x: date_macd,
+	    y: macd_hist,
+	    type: 'bar',
+	    xaxis: 'x',
+	 	yaxis: 'y2'
+	  };
+
+	var data=[trace1, trace2, trace3, trace4, trace5];
 
 	var layout = {
 	plot_bgcolor: 'white',
@@ -96,7 +133,7 @@ foreach ($ma as $key => $value) {
 	xaxis: {domain: [0,1], rangeslider: {visible: false}, ticks:'outside', side: 'bottom', anchor: 'y2'},
 	yaxis: {domain: [0.5,1],title: 'price',exponentformat:'none',},
 	xaxis2: {domain: [0,1],rangeslider: {visible: false},ticks: 'outside',side: 'bottom', anchor: 'y2'},
-	yaxis2: {domain: [0,0.5],title: 'price',exponentformat:'none',},
+	yaxis2: {domain: [0,0.2],title: 'price',exponentformat:'none',},
 	};
 
 
