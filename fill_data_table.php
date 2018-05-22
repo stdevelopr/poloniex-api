@@ -9,7 +9,7 @@ $end = date('U');
 $period = 14400; //4hrs
 
 // Numer of candles to retrieve
-$n_candles = 10;
+$n_candles = 100;
 
 $start = $end - $period*$n_candles;
 
