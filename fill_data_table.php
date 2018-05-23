@@ -9,7 +9,7 @@ $end = date('U');
 $period = 14400; //4hrs
 
 // Numer of candles to retrieve
-$n_candles = 100;
+$n_candles = 200;
 
 $start = $end - $period*$n_candles;
 
@@ -56,7 +56,7 @@ if ($result->num_rows > 0) {
                 echo 'Adding '.$pair.' Date_time: '.$date.'<br>';
             }
         }
-        usleep(500000);
+        usleep(250000);
     }
 } else {
     echo "0 coins listed. Verify the table coins.";
