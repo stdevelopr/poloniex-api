@@ -1,3 +1,6 @@
+
+//Fill the table with coins. Only BTC market.
+
 <?php 
 
 include 'connect_db.php';
