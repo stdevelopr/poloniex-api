@@ -1,5 +1,3 @@
-//Create mysql coins table 
-
 <?php 
 
 include 'connect_db.php';
