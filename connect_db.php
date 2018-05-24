@@ -1,6 +1,5 @@
-//Connect to Mysql database
-
 <?php
+//Connect to Mysql database
 
 //Server info
 $server = 'localhost';
