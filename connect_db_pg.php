@@ -1,4 +1,5 @@
 <?php
+//Connect to PostgreSQL database
 
 //Server info
 $server = 'localhost';
