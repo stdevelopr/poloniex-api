@@ -18,7 +18,7 @@ curl_close($ch);
 
 ob_implicit_flush(true);
 ob_end_flush();
-// Convert to an Json array
+
 $ticker = json_decode($result, true);
 
 foreach($ticker as $value=>$pair){
