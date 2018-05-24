@@ -2,6 +2,7 @@
 
 include 'connect_db.php';
 
+
 //Create a table containing the data
 $tb = 'CREATE TABLE Data(
 pair varchar(15),
