@@ -5,13 +5,13 @@ include 'connect_db_pg.php';
 $tb = 'CREATE TABLE Data(
 pair varchar(15),
 date_time int,
-high real,
-low real,
-open real,
-close real,
-volume real,
-quoteVolume real,
-weightedAverage real,
+high NUMERIC(9, 8),
+low NUMERIC(9, 8),
+open NUMERIC(9, 8),
+close NUMERIC(9, 8),
+volume float,
+quoteVolume float,
+weightedAverage NUMERIC(9, 8),
 PRIMARY KEY (pair, date_time)
 )';
 
