@@ -1,70 +1,61 @@
-<?php 
-include 'connect_db.php';
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>Ajax com PHP</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+		<!-- check database -->
+		<input type="button" value="Check Database" onclick="connect()">
+		<input id= "mysql" type="radio" name="database" value="MySQL" checked> MySQL
+		<input id = "postgre" type="radio" name="database" value="PostgreSQL"> PostgreSQL
+		<p id="result"> Connection... </p>
 
-// Actual Time
-$end = date('U');
+		<!-- check tables -->
+		<div>	
+			<input type="button" value="Check Coins table" onclick="check_table_coins()">
+		</div>
+		<p id="table_coins_status"> Table status...</p>
 
-// Period to query
-$period = 14400; //4hrs
-
-// Numer of candles to retrieve
-$n_candles = 10;
-
-$start = $end - $period*$n_candles;
-
-// Chosen pair
-$pair = 'BTC_XMR';
-
-//To get all pairs
-// $url= 'https://poloniex.com/public?command=returnTicker';
-
-// Url to query
-$url= 'https://poloniex.com/public?command=returnChartData&currencyPair='.$pair.'&start='.$start.'&end='.$end.'&period='.$period;
-//  Initiate curl
-$ch = curl_init();
-// Disable SSL verification
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-// Will return the response, if false it print the response
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-// Set the url
-curl_setopt($ch, CURLOPT_URL,$url);
-// Execute
-$result=curl_exec($ch);
-// Closing
-curl_close($ch);
-
-// Convert to an Json array
-$ticker = json_decode($result, true);
-
-//loop through the array and print the values
-foreach($ticker as $value=>$pair){
-				print_r($value);
-			echo '<br>';
-			print_r($pair['date']);
-			echo '<br>';
-			print_r($pair['close']);
-	$ins = "INSERT INTO `Ticker`(`date_time`, `close`) VALUES ('$pair[date]','$pair[close]')";
-	if($conn->query($ins) === TRUE){
-			print_r($value);
-			echo '<br>';
-			print_r($pair);
-			echo '<br>';
-	}else{
-		echo "Error: " . $ins . "<br>" . $conn->error;
-	};
-}
+		<div>	
+			<input type="button" value="Check Data table" onclick="check_table_data()">
+		</div>
+		<p id="table_data_status"> Table status...</p>
 
 
+		<div>	
+			<input type="button" value="Create Coins table" onclick="create_table_coins()">
+		</div>
+		<p id="create_coins_status"> Create table Coins</p>
+
+		<div>	
+			<input type="button" value="Create Data table" onclick="create_table_data()">
+		</div>
+		<p id="create_data_status"> Create table Data</p>
+
+
+		<div>	
+			<input type="button" value="Fill Coins table" onclick="fill_table_coins()">
+		</div>
+		<p id="fill_coins_status"> Fill table Coins</p>
+
+		<div>	
+			<input type="button" value="Fill Data table" onclick="fill_table_data()">
+		</div>
+		<p id="fill_data_status"> Fill table Data</p>
+
+		<div>	
+			<input type="button" value="Drop Coins table" onclick="drop_table_coins()">
+		</div>
+		<p id="drop_coins_status"> Drop table Coins</p>
+
+		<div>	
+			<input type="button" value="Drop Data table" onclick="drop_table_data()">
+		</div>
+		<p id="drop_data_status"> Drop table Data</p>
 
 
 
-	// $ins = "INSERT INTO `Ticker`(`pair`, `last`) VALUES ('$value','$pair[last]')";
-	// if($conn->query($ins) === TRUE){
-	// 		print_r($value);
-	// 		echo '<br>';
-	// 		print_r($pair);
-	// 		echo '<br>';
-	// }else{
-	// 	echo "Error: " . $ins . "<br>" . $conn->error;
-	// };
-// }
+		<script src="js/script.js"></script>
+    </body>
+</html>

@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "curl/curl",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mod/curl.git",
-                "reference": "d4970cf3451de7688b90af77299548ada72b53dd"
+                "reference": "958363d1fed599aa24efb2221e2c1e6c61711464"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mod/curl/zipball/d4970cf3451de7688b90af77299548ada72b53dd",
-                "reference": "d4970cf3451de7688b90af77299548ada72b53dd",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/958363d1fed599aa24efb2221e2c1e6c61711464",
+                "reference": "958363d1fed599aa24efb2221e2c1e6c61711464",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "curl",
                 "dot"
             ],
-            "time": "2018-05-02T16:32:35+00:00"
+            "time": "2018-05-23T20:32:06+00:00"
         },
         {
             "name": "lupecode/php-trader-native",
