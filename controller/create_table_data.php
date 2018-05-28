@@ -8,7 +8,7 @@ ob_end_clean();
 //Create a table containing the data
 $tb = 'CREATE TABLE Data(
 pair varchar(15),
-date_time int,
+date_time int NOT NULL,
 high double,
 low double,
 open double,

@@ -4,6 +4,9 @@ ob_start();
 include 'connect_db_pg.php';
 ob_end_clean();
 
+
+$time_start = microtime(true);
+
 // Actual Time
 $end = date('U');
 
@@ -17,6 +20,8 @@ $start = $end - $period*$n_candles;
 
 $sql = 'SELECT * FROM Coins';
 
+$end = $start + $period*2;
+
 $result = pg_query($conn, $sql);
 //atualize the screen
 ob_implicit_flush(true);
@@ -29,7 +34,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 // Will return the response, if false it print the response
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-if ($result) {
+if(pg_num_rows($result)>1){
     // output data of each row
     while($row = pg_fetch_array($result)) {
     	$pair = $row['pair'];
@@ -43,24 +48,36 @@ if ($result) {
         //loop through the array
         foreach ($data as $key => $value) {
             $date = $value['date'];
-            $high = $value['high'];
-            $low = $value['low'];
-            $open = $value['open'];
-            $close = $value['close'];
-            $volume = $value['volume'];
-            $quoteVolume = $value['quoteVolume'];
-            $weightedAverage = $value['weightedAverage'];
-            $ins = "INSERT INTO Data (pair, date_time, high, low, open, close, volume, quoteVolume, weightedAverage) VALUES ('$pair', '$date', '$high', $low, $open, $close, $volume, $quoteVolume, $weightedAverage)";
-            $add = pg_query($conn, $ins);
-            if($add) {
-                echo 'Adding: '.$pair.' Date_time: '.$date.'<br>';
+            if($date!=0){;
+                $high = $value['high'];
+                $low = $value['low'];
+                $open = $value['open'];
+                $close = $value['close'];
+                $volume = $value['volume'];
+                $quoteVolume = $value['quoteVolume'];
+                $weightedAverage = $value['weightedAverage'];
+                $ins = "INSERT INTO Data (pair, date_time, high, low, open, close, volume, quoteVolume, weightedAverage) VALUES ('$pair', '$date', '$high', $low, $open, $close, $volume, $quoteVolume, $weightedAverage)";
+                $add = pg_query($conn, $ins);
+                if($add) {
+                    echo 'Adding: '.$pair.' Date_time: '.$date.'<br>';
+                }
             }
         }
         usleep(250000);
     }
+    echo 'Completed';
+    echo '<br>';
+    echo '<br>';
 } else {
-    echo "Error...";
+    echo "No coins found...";
 }
-echo 'Completed';
 // Closing
 curl_close($ch);
+
+
+$time_end = microtime(true);
+$execution_time = ($time_end - $time_start);
+echo '<b>Total Execution Time:</b> '.$execution_time.'s';
+
+$time = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+echo '<b>Total Execution Time:</b> '.$time;

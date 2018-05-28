@@ -4,6 +4,8 @@ ob_start();
 include 'connect_db.php';
 ob_end_clean();
 
+$time_start = microtime(true);
+
 // Actual Time
 $end = date('U');
 
@@ -11,11 +13,15 @@ $end = date('U');
 $period = 14400; //4hrs
 
 // Numer of candles to retrieve
-$n_candles = 2;
+$n_candles = 150;
 
 $start = $end - $period*$n_candles;
 
+$end = $start + $period*2;
+
 $sql = 'SELECT * FROM Coins';
+
+$end = $start + $period*2;
 
 // runs the query and puts the resulting data into a variable
 $result = $conn->query($sql);  //A variable $results has a collection of rows which are returned by a query.
@@ -37,7 +43,6 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {  //the function fetch_assoc() fetch the first element from the collection.
     	$pair = $row['pair'];
     	$url= 'https://poloniex.com/public?command=returnChartData&currencyPair='.$pair.'&start='.$start.'&end='.$end.'&period='.$period;
-        echo $url;
 		// Set the url
 		curl_setopt($ch, CURLOPT_URL,$url);
 		// Execute
@@ -47,16 +52,18 @@ if ($result->num_rows > 0) {
         //loop through the array
         foreach ($data as $key => $value) {
             $date = $value['date'];
-            $high = $value['high'];
-            $low = $value['low'];
-            $open = $value['open'];
-            $close = $value['close'];
-            $volume = $value['volume'];
-            $quoteVolume = $value['quoteVolume'];
-            $weightedAverage = $value['weightedAverage'];
-            $ins = "INSERT INTO Data (pair, date_time, high, low, open, close, volume, quoteVolume, weightedAverage) VALUES ('$pair', '$date', '$high', $low, $open, $close, $volume, $quoteVolume, $weightedAverage)";
-            if($conn->query($ins) === TRUE){
-                echo 'Adding '.$pair.' Date_time: '.$date.'<br>';
+            if($date!=0){
+                $high = $value['high'];
+                $low = $value['low'];
+                $open = $value['open'];
+                $close = $value['close'];
+                $volume = $value['volume'];
+                $quoteVolume = $value['quoteVolume'];
+                $weightedAverage = $value['weightedAverage'];
+                $ins = "INSERT INTO Data (pair, date_time, high, low, open, close, volume, quoteVolume, weightedAverage) VALUES ('$pair', '$date', '$high', $low, $open, $close, $volume, $quoteVolume, $weightedAverage)";
+                if($conn->query($ins) === TRUE){
+                    echo 'Adding '.$pair.' Date_time: '.$date.'<br>';
+                }
             }
         }
         usleep(250000);
@@ -65,5 +72,14 @@ if ($result->num_rows > 0) {
     echo "0 coins listed. Verify the table coins.";
 }
 echo 'Completed';
+echo '<br>';
+echo '<br>';
 // Closing
 curl_close($ch);
+
+$time_end = microtime(true);
+$execution_time = ($time_end - $time_start);
+echo '<b>Total Execution Time:</b> '.$execution_time.'s';
+
+$time = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+echo '<b>Total Execution Time:</b> '.$time;

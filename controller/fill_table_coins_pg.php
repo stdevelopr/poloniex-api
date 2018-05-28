@@ -37,3 +37,4 @@ foreach($ticker as $value=>$pair){
 		}
 	}
 }
+echo 'Completed!';

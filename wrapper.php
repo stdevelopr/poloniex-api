@@ -55,6 +55,19 @@
 		<p id="drop_data_status"> Drop table Data</p>
 
 
+		<div>	
+			<input type="button" value="Data status" onclick="data_status()">
+		</div>
+		<p id="data_status"> Data status</p>
+
+
+		<div>	
+			<input type="button" value="Data atualize" onclick="data_atualize()">
+		</div>
+		<p id="data_atualize"> Data Atualize </p>
+
+
+
 
 		<script src="js/script.js"></script>
     </body>
