@@ -33,10 +33,11 @@ ob_end_clean();
 			$('#pol_table').tablesorter();
 		});
 	</script>
+
 </head>
 <body>
 <table class="table table-striped table-dark table-hover" id="pol_table">
-  <thead>
+  <thead class="first_row">
     <tr>
       <th scope="col">Pair</th>
       <th scope="col">MACDSignal</th>
@@ -134,11 +135,15 @@ foreach ($data as $key => $value) {
 	}
 	echo'
 	<tr>
-    <th scope="row">'.$pair.'</th>
-    <td class='.$status.'>'.$status.'</td>
-    <td>'.$time.'</td>
-    <td>@mdo</td>
-    </tr>';
+    <th scope="row" data-toggle="collapse" data-target="#collapse-1">'.$pair.'</th>
+    <td class='.$status.' data-toggle="collapse" data-target="#collapse-1">'.$status.'</td>
+    <td data-toggle="collapse" data-target="#collapse-1">'.$time.'</td>
+    <td data-toggle="collapse" data-target="#collapse-1">@stdevelpr</td>
+    </tr>
+    <div>
+    
+    </div>';
+
 	// echo '<div class=line>';
 	// echo '<p>Pair :'.$pair.'</p>';
 	// echo '<p>MACD Signal: '.$status.'</p>';
@@ -177,6 +182,5 @@ foreach ($data as $key => $value) {
 ?>
   </tbody>
 </table>
-
 </body>
 </html>
