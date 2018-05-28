@@ -1,3 +1,7 @@
-.line{
-	border: 2px solid black;
+.positive{
+	color: green !important;
+}
+
+.negative{
+	color: red !important;
 }

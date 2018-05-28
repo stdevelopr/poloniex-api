@@ -35,7 +35,7 @@ ob_end_clean();
 	</script>
 </head>
 <body>
-<table class="table table-dark" id="pol_table">
+<table class="table table-striped table-dark table-hover" id="pol_table">
   <thead>
     <tr>
       <th scope="col">Pair</th>
@@ -135,7 +135,7 @@ foreach ($data as $key => $value) {
 	echo'
 	<tr>
     <th scope="row">'.$pair.'</th>
-    <td>'.$status.'</td>
+    <td class='.$status.'>'.$status.'</td>
     <td>'.$time.'</td>
     <td>@mdo</td>
     </tr>';
