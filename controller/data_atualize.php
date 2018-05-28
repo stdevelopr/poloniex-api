@@ -32,8 +32,8 @@ echo '<br>';
 
 
 //Actual Time
-$actual = date('U');
-echo 'Actual Time: '.date("d-m-Y H:i:s", $actual);
+$actual = gmdate('U');
+echo 'Actual Time: '.gmdate("d-m-Y H:i:s", $actual);
 echo '<br>';
 echo '<br>';
 
@@ -112,4 +112,6 @@ if($actual > $next){
 	// Closing
 	curl_close($ch);
 
+} else{
+	echo 'Up to date!';
 }

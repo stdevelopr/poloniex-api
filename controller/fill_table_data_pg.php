@@ -20,8 +20,6 @@ $start = $end - $period*$n_candles;
 
 $sql = 'SELECT * FROM Coins';
 
-$end = $start + $period*2;
-
 $result = pg_query($conn, $sql);
 //atualize the screen
 ob_implicit_flush(true);

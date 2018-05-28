@@ -17,11 +17,7 @@ $n_candles = 150;
 
 $start = $end - $period*$n_candles;
 
-$end = $start + $period*2;
-
 $sql = 'SELECT * FROM Coins';
-
-$end = $start + $period*2;
 
 // runs the query and puts the resulting data into a variable
 $result = $conn->query($sql);  //A variable $results has a collection of rows which are returned by a query.

@@ -1,48 +1,29 @@
 <?php 
 use LupeCode\phpTraderNative\Trader as Trader;
 
-require_once '../vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
-include 'connect_db.php';
+$vendorDir = dirname(dirname(__FILE__));
+
+
+ob_start();
+include $vendorDir.'/poloniex-api/controller/connect_db_pg.php';
+ob_end_clean();
+
 $time_start = microtime(true);
 
-
-
-//Execute various queries on database
-// $coins = 'SELECT * FROM Coins';
-// $get = $conn->query($coins);
-
-// if ($get->num_rows > 0) {
-//     // output data of each row
-//     while($row = $get->fetch_assoc()) {  //the function fetch_assoc() fetch the first element from the collection.
-//     	$pair = $row['pair'];
-//     	$sql = 'SELECT pair, close FROM Data WHERE pair="'.$pair.'"';
-//     	$result = $conn->query($sql); 
-    	
-//     	// if ($result->num_rows > 0) {
-// //     // output data of each row
-// 	    while($row = $result->fetch_assoc()) {  //the function fetch_assoc() fetch the first element from the collection.
-// 	    	foreach ($row as $key => $value) {
-// 	    		print_r($row);
-// 	    		echo '<br>';
-// 	    	}
-// 	    }
-//     }
-// } //Execute various queries on database  END.
-
-
-
-
-// Execute only one query on the database
+?>
+<link rel="stylesheet" href="css/main.css">
+<?
 
 // select all columns from database
 $sql = 'SELECT pair, date_time, close FROM Data';
 // runs the query and puts the resulting data into a variable
-$result = $conn->query($sql);  //A variable $results has a collection of rows which are returned by a query.
-if ($result->num_rows > 0) {
+$result = pg_query($conn, $sql);  //A variable $results has a collection of rows which are returned by a query.
+if (pg_num_rows($result)>1) {
 $data = array(); //data array store the values(date_time, close) for each pair
 // output data of each row
-    while($row = $result->fetch_assoc()) {  //the function fetch_assoc() fetch the first element from the collection.
+    while($row = pg_fetch_array($result)) {  //the function fetch_assoc() fetch the first element from the collection.
     	foreach ($row as $key => $value) {
     		$data[$row['pair']][$row['date_time']] = $row['close'];
     	}
@@ -103,10 +84,11 @@ foreach ($data as $key => $value) {
 		$status='negative';
 		$time =  ($c*4).'hrs';
 	}
-
-	echo 'Pair :'.$pair.'<br>';
-	echo 'MACD Signal: '.$status.'<br>';
-	echo 'Last Cross: '.$time;
+	echo '<div class=line>';
+	echo '<p>Pair :'.$pair.'</p>';
+	echo '<p>MACD Signal: '.$status.'</p>';
+	echo '<p>Last Cross: '.$time.'</p>';
+	echo '</div>';
 	echo '<br><br>';
 
 

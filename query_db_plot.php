@@ -3,7 +3,10 @@ use LupeCode\phpTraderNative\Trader as Trader;
 
 require_once 'vendor/autoload.php';
 
-include 'connect_db.php';
+$vendorDir = dirname(dirname(__FILE__));
+
+include $vendorDir.'/poloniex-api/controller/connect_db.php';
+
 
 // select all columns from database
 $sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="BTC_ARDR"';
