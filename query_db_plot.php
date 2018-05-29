@@ -5,11 +5,15 @@ require_once 'vendor/autoload.php';
 
 $vendorDir = dirname(dirname(__FILE__));
 
+ob_start();
 include $vendorDir.'/poloniex-api/controller/connect_db.php';
+ob_end_clean();
 
+$pair=$_GET["pair"];
+echo $pair;
 
 // select all columns from database
-$sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="BTC_ARDR"';
+$sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="'.$pair.'"';
 
 // runs the query and puts the resulting data into a variable
 $result = $conn->query($sql);  //A variable $results has a collection of rows which are returned by a query.

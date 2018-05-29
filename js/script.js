@@ -168,3 +168,13 @@ function data_atualize(){
     }
     // xmlhttp.send();
 }
+
+function plot(pair){
+        var w = 500;
+        var h = 500;
+        var left = Number((window.innerWidth/2)-(w/2));
+        var tops = Number((window.innerHeight/2)-(h/2));
+
+winops = window.open("query_db_plot.php/?pair="+pair, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+winops.focus();
+}

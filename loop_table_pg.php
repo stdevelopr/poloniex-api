@@ -27,10 +27,14 @@ ob_end_clean();
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 	<!-- TableSorter -->
 	<script src="js/tablesorter.js"></script>
-	<!-- Initialize TableSorter -->
+	<script src="js/script.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('#pol_table').tablesorter();
+			$('tr').click(function(event) {
+    		var pair = event.currentTarget.id;
+    		plot(pair);
+		});
 		});
 	</script>
 
@@ -134,15 +138,12 @@ foreach ($data as $key => $value) {
 		$time =  ($c*4);
 	}
 	echo'
-	<tr>
-    <th scope="row" data-toggle="collapse" data-target="#collapse-1">'.$pair.'</th>
-    <td class='.$status.' data-toggle="collapse" data-target="#collapse-1">'.$status.'</td>
-    <td data-toggle="collapse" data-target="#collapse-1">'.$time.'</td>
-    <td data-toggle="collapse" data-target="#collapse-1">@stdevelpr</td>
-    </tr>
-    <div>
-    
-    </div>';
+	<tr id="'.$pair.'">
+    <th scope="row">'.$pair.'</th>
+    <td class="'.$status.'">'.$status.'</td>
+    <td>'.$time.'</td>
+    <td>@stdevelpr</td>
+    </tr>';
 
 	// echo '<div class=line>';
 	// echo '<p>Pair :'.$pair.'</p>';
