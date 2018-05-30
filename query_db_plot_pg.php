@@ -3,10 +3,8 @@ use LupeCode\phpTraderNative\Trader as Trader;
 
 require_once 'vendor/autoload.php';
 
-$vendorDir = dirname(dirname(__FILE__));
-
 ob_start();
-include $vendorDir.'/poloniex-api/controller/connect_db.php';
+include 'connect_db_pg.php';
 ob_end_clean();
 
 $pair=$_GET["pair"];
@@ -17,11 +15,11 @@ $sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="'.$
 
 // $sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="BTC_AMP"';
 
-$result = $conn->query($sql);  
+$result =pg_query($conn, $sql); 
+print_r(pg_num_rows($result));
 
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) { 
+if(pg_num_rows($result)>1) {
+    while($row = pg_fetch_array($result)) { 
         $date_time[] = $row['date_time'];
         $formated_date[] = gmdate("d-m-Y H:i:s", $row['date_time']);
         $high[] = $row['high'];
