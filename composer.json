@@ -1,6 +1,6 @@
 {
-    "name": "st/poloniex-api",
-    "description": "retrieves data from poloniex and stores it in a database",
+    "name": "poloniex-macd-app",
+    "description": "Retrieves data from poloniex, stores it in a database and calculates the MACD for all pairs",
     "type": "project",
     "authors": [
         {
