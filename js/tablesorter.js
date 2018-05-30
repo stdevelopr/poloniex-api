@@ -1,5 +1,4 @@
 /*
- * 
  * TableSorter 2.0 - Client-side table sorting with ease!
  * Version 2.0.5b
  * @requires jQuery v1.2.3
