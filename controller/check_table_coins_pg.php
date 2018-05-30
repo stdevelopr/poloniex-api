@@ -1,3 +1,4 @@
+<!-- Check the existence of the table Coins on PostgreSQL database -->
 
 <?php
 ob_start();
