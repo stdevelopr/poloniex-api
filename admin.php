@@ -36,20 +36,9 @@
 			<p id="result"> Connection... </p>
 		</div>
 
-		<!-- check tables -->
+		<!-- Tables Control -->
 		<div class="container  mt-3">
 			<div class="row">
-				<div class="container col-sm-4 text-center">
-					<div class="container">		
-						<input type="button" value="Check Coins table" class="btn btn-warning" onclick="check_table_coins()">	
-						<p id="table_coins_status"> Table status...</p>
-					</div>
-					<div class="container">				
-						<input type="button" value="Check Data table" class="btn btn-warning" onclick="check_table_data()">		
-						<p id="table_data_status"> Table status...</p>			
-					</div>
-				</div>
-			
 				<!-- create tables -->
 				<div class="container col-sm-4 d-inline-block text-center">
 					<div class="container d-inline-block">	
@@ -61,6 +50,19 @@
 						<p id="create_data_status"> ?</p>
 					</div>
 				</div>
+
+
+				<div class="container col-sm-4 text-center">
+					<div class="container">		
+						<input type="button" value="Check Coins table" class="btn btn-warning" onclick="check_table_coins()">	
+						<p id="table_coins_status"> Table status...</p>
+					</div>
+					<div class="container">				
+						<input type="button" value="Check Data table" class="btn btn-warning" onclick="check_table_data()">		
+						<p id="table_data_status"> Table status...</p>			
+					</div>
+				</div>
+			
 				
 				<!-- drop tables -->
 				<div class="container col-sm-4 d-inline-block text-center">
