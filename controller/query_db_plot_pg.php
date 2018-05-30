@@ -1,7 +1,8 @@
 <?php 
 use LupeCode\phpTraderNative\Trader as Trader;
 
-require_once 'vendor/autoload.php';
+$vendorDir = dirname(dirname(__FILE__));
+require_once $vendorDir.'/vendor/autoload.php';
 
 ob_start();
 include 'connect_db_pg.php';
