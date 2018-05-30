@@ -1,4 +1,4 @@
-
+<!-- Check the existence of the table Data on MySQL database -->
 <?php
 ob_start();
 include 'connect_db.php';
