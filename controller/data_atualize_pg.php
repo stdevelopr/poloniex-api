@@ -37,12 +37,8 @@ $actual = gmdate('U');
 echo 'Actual Time: '.gmdate("d-m-Y H:i:s", $actual);
 echo '<br>';
 echo '<br>';
-echo $actual;
-echo '<br>';
-echo $next;
 
 if($actual > $next){
-	echo 'here';
 	echo 'Updating...';
 	echo '<br>';
 	echo '<br>';
