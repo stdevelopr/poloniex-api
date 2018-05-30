@@ -1,6 +1,6 @@
-<?php
-//Connect to Mysql database
+<!-- Connect to MySQL database -->
 
+<?php
 //Server info
 $server = 'localhost';
 $user = 'root';
