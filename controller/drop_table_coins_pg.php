@@ -1,11 +1,9 @@
+<!-- Drop PostSQL Coins table -->
 <?php 
-
 ob_start();
 include 'connect_db_pg.php';
 ob_end_clean();
 
-
-//Create a table containing the coins
 $tb = 'DROP TABLE Coins';
 $result = pg_query($conn, $tb);
  if($result) {
