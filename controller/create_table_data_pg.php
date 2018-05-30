@@ -1,10 +1,9 @@
+<!-- Create a PostgreSQL table containing the data -->
 <?php 
-
 ob_start();
 include 'connect_db_pg.php';
 ob_end_clean();
 
-//Create a table containing the data
 $tb = 'CREATE TABLE Data(
 pair varchar(15),
 date_time int NOT NULL,
