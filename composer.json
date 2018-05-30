@@ -5,7 +5,8 @@
     "authors": [
         {
             "name": "stdevelopr",
-            "email": "stdevelopr@gmail.com"
+            "email": "stdevelopr@gmail.com",
+            "homepage": "http://github.com/stdevelopr"
         }
     ],
     "require": {
