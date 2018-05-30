@@ -1,13 +1,12 @@
 <?php 
 use LupeCode\phpTraderNative\Trader as Trader;
 
-require_once 'vendor/autoload.php';
 
 $vendorDir = dirname(dirname(__FILE__));
 
-
+require_once $vendorDir.'/vendor/autoload.php';
 ob_start();
-include $vendorDir.'/poloniex-api/controller/connect_db_pg.php';
+include 'connect_db_pg.php';
 ob_end_clean();
 
 // $time_start = microtime(true);
@@ -18,7 +17,7 @@ ob_end_clean();
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="../css/main.css">
 	<link rel="shortcut icon" href="/favicon.ico">
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -26,8 +25,8 @@ ob_end_clean();
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 	<!-- TableSorter -->
-	<script src="js/tablesorter.js"></script>
-	<script src="js/script.js"></script>
+	<script src="../js/tablesorter.js"></script>
+	<script src="../js/script.js"></script>
 	<script>
 		$(document).ready(function(){
 			$('#pol_table').tablesorter();

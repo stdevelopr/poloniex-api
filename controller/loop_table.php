@@ -1,13 +1,11 @@
 <?php 
 use LupeCode\phpTraderNative\Trader as Trader;
 
-require_once 'vendor/autoload.php';
-
 $vendorDir = dirname(dirname(__FILE__));
 
-
+require_once $vendorDir.'/vendor/autoload.php';
 ob_start();
-include $vendorDir.'/poloniex-api/controller/connect_db.php';
+include 'connect_db.php';
 ob_end_clean();
 
 $time_start = microtime(true);

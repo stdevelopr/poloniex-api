@@ -66,7 +66,10 @@
 		</div>
 		<p id="data_atualize"> Data Atualize </p>
 
-
+		<div>	
+			<input type="button" value="run" onclick="run()">
+		</div>
+		<p id="run"> Run </p>
 
 
 		<script src="js/script.js"></script>

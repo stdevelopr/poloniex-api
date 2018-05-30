@@ -49,8 +49,8 @@ foreach ($macd as $key => $value) {
 }
 ?>
 
-
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<link rel="stylesheet" href="css/main.css">
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
