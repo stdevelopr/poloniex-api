@@ -1,21 +1,16 @@
 <?php 
 use LupeCode\phpTraderNative\Trader as Trader;
 
-require_once 'vendor/autoload.php';
-
 $vendorDir = dirname(dirname(__FILE__));
+require_once $vendorDir.'/vendor/autoload.php';
 
 ob_start();
-include $vendorDir.'/poloniex-api/controller/connect_db.php';
+include 'connect_db.php';
 ob_end_clean();
 
 $pair=$_GET["pair"];
-// echo $pair;
 
-// select all columns from database
 $sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="'.$pair.'"';
-
-// $sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="BTC_AMP"';
 
 $result = $conn->query($sql);  
 
@@ -61,6 +56,7 @@ foreach ($macd as $key => $value) {
 <body>
 <!-- Plotly chart will be drawn inside this div -->
 <div id="graph"></div>
+
 <script>
 	var date_time= <?php echo json_encode($date_time); ?>;
 	var close= <?php echo json_encode($close); ?>;
