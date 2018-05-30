@@ -1,5 +1,6 @@
-<?php 
+<!-- Atualize MySQL data table -->
 
+<?php 
 ob_start();
 include 'connect_db.php';
 ob_end_clean();
@@ -78,14 +79,13 @@ if($actual > $next){
 		            $ins = "INSERT INTO Data (pair, date_time, high, low, open, close, volume, quoteVolume, weightedAverage) VALUES ('$pair', '$date', '$high', $low, $open, $close, $volume, $quoteVolume, $weightedAverage)";
 		            if($conn->query($ins) === TRUE){
 		                echo 'Adding '.$pair.' Date_time: '.$date.'<br>';
-		                $remove = "DELETE FROM Data WHERE date_time= $first";
-		                $rem= $conn->query($remove);
-		                if($rem){
-		                	 echo 'Removing '.$pair.' Date_time '.$first;
-		                	 echo '<br>';
-		                	 echo '<br>';
-		                }
-
+		                //To mantain the size of the table...
+		                // $remove = "DELETE FROM Data WHERE date_time= $first";
+		                // $rem= $conn->query($remove);
+		                // if($rem){
+		                // 	 echo 'Removing '.$pair.' Date_time '.$first;
+		                // 	 echo '<br>';
+		                // 	 echo '<br>';
 		            }
 	        	}
 	        }
