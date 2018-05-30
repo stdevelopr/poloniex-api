@@ -11,15 +11,30 @@ body{
 	height: 100%;
 }
 
-.positive{
+.positive, .yes{
 	color: green !important;
 }
 
-.negative{
+.negative, .no{
 	color: red !important;
 }
 
 .first_row{
 	color: yellow;
 	background: black;
+	height: 600px !important;
+}
+
+.headerSortUp{
+	background-image: url('../images/up.gif');
+	background-color: #3399FF !important;
+	background-repeat: no-repeat;
+	background-position: center right;
+}
+
+.headerSortDown{
+	background-image: url('../images/down.gif');
+	background-color: #3399FF !important;
+	background-repeat: no-repeat;
+	background-position: center right;
 }
