@@ -1,5 +1,6 @@
-<?php 
+<!-- Atualize PostgreSQL data table -->
 
+<?php 
 ob_start();
 include 'connect_db_pg.php';
 ob_end_clean();
@@ -39,6 +40,7 @@ echo '<br>';
 echo $actual;
 echo '<br>';
 echo $next;
+
 if($actual > $next){
 	echo 'here';
 	echo 'Updating...';
@@ -52,23 +54,19 @@ if($actual > $next){
 	ob_implicit_flush(true);
 	ob_end_flush();
 
-	// set curl
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 	if (pg_num_rows($result)>1) {
-	    // output data of each row
 	    while($row = pg_fetch_array($result)) { 
 	    	$pair = $row['pair'];
 	    	$url= 'https://poloniex.com/public?command=returnChartData&currencyPair='.$pair.'&start='.$next.'&end='.$next.'&period='.$period;
-			// Set the url
 			curl_setopt($ch, CURLOPT_URL,$url);
-			// Execute
 			$get=curl_exec($ch);
-			//decode
+
 			$data = json_decode($get, true);
-	        //loop through the array
+
 	        foreach ($data as $key => $value) {
 	        	$date = $value['date'];
             	if($date!=0){
@@ -86,13 +84,14 @@ if($actual > $next){
 		            $add = pg_query($conn, $ins);
 	                if($add) {
 	                    echo 'Adding: '.$pair.' Date_time: '.$date.'<br>';
-		                $remove = "DELETE FROM Data WHERE date_time= $first";
-		                $rem= pg_query($conn, $remove);
-		                if($rem){
-		                	 echo 'Removing '.$pair.' Date_time '.$first;
-		                	 echo '<br>';
-		                	 echo '<br>';
-		                }
+	                    // To mantain the size of the table...
+		                // $remove = "DELETE FROM Data WHERE date_time= $first";
+		                // $rem= pg_query($conn, $remove);
+		                // if($rem){
+		                // 	 echo 'Removing '.$pair.' Date_time '.$first;
+		                // 	 echo '<br>';
+		                // 	 echo '<br>';
+		                // }
 	                }
 	        	}
 	        }
@@ -109,7 +108,7 @@ if($actual > $next){
 	} else{
 		echo 'No data';
 	}
-	// Closing
+
 	curl_close($ch);
 
 }else{
