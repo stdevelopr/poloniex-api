@@ -76,37 +76,20 @@ function create_table_data(){
 
 
 function fill_table_coins(){
-    // xmlhttp.onreadystatechange = function(){
-    //     if(xmlhttp.readyState==4 && xmlhttp.status==200){
-    //     document.getElementById('fill_coins_status').innerHTML= xmlhttp.responseText;
-    //     }
-    // };
     if(document.getElementById('mysql').checked){
         window.location.assign(dir+'/controller/fill_table_coins.php');
-        // xmlhttp.open('GET', dir+'/controller/fill_table_coins.php', true);
     }else{
         window.location.assign(dir+'/controller/fill_table_coins_pg.php');
-        // xmlhttp.open('GET', dir+'/controller/fill_table_coins_pg.php', true);
     }
-    // xmlhttp.send();
 }
 
 
 function fill_table_data(){
-//     xmlhttp.onreadystatechange = function(){
-//         if(xmlhttp.readyState==4 && xmlhttp.status==200){
-//         document.getElementById('fill_data_status').innerHTML= xmlhttp.responseText;
-//         }
-//     };
     if(document.getElementById('mysql').checked){
         window.location.assign(dir+'/controller/fill_table_data.php');
-        // xmlhttp.open('GET', dir+'/controller/fill_table_data.php', true);
     }else{
         window.location.assign(dir+'/controller/fill_table_data_pg.php');
-        // xmlhttp.open('GET', dir+'/controller/fill_table_data_pg.php', true);
     }
-//     xmlhttp.send();
-
 }
 
 
@@ -154,19 +137,11 @@ function data_status(){
 }
 
 function data_atualize(){
-    // xmlhttp.onreadystatechange = function(){
-    //     if(xmlhttp.readyState==4 && xmlhttp.status==200){
-    //     document.getElementById('data_atualize').innerHTML= xmlhttp.responseText;
-    //     }
-    // };
     if(document.getElementById('mysql').checked){
         window.location.assign(dir+'/controller/data_atualize.php');
-        // xmlhttp.open('GET', dir+'/controller/data_atualize.php', true);
     }else{
         window.location.assign(dir+'/controller/data_atualize_pg.php');
-        // xmlhttp.open('GET', dir+'/controller/data_atualize_pg.php', true);
     }
-    // xmlhttp.send();
 }
 
 function plot(pair){
@@ -183,11 +158,7 @@ function run(){
 
     if(document.getElementById('mysql').checked){
         window.location.assign(dir+'/controller/loop_table.php');
-        // xmlhttp.open('GET', dir+'/controller/fill_table_data.php', true);
     }else{
         window.location.assign(dir+'/controller/loop_table_pg.php');
-        // xmlhttp.open('GET', dir+'/controller/fill_table_data_pg.php', true);
     }
-//     xmlhttp.send();
-
 }
