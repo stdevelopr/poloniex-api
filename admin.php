@@ -79,31 +79,23 @@
 		<!-- fill tables -->
 		<div class="container mt-3 text-center">
 			<div class="container">
-				<input type="button" class="btn btn-primary m-3" value="Fill Coins table" onclick="fill_table_coins()">
-	
+				<input type="button" class="btn btn-primary m-3" value="Fill Coins table" onclick="fill_table_coins()">	
 				<p id="fill_coins_status"></p>
-
 		
-				<input type="button"  class="btn btn-primary m-3" value="Fill Data table" onclick="fill_table_data()">
-		
+				<input type="button"  class="btn btn-primary m-3" value="Fill Data table" onclick="fill_table_data()">		
 				<p id="fill_data_status"></p>
 
 			</div>
-		</div>
-		
+		</div>		
 
 		<!--tables info-->
 		<div class="container mt-3 text-center">
 			<div class="container">
-				<input type="button" class="btn btn-info m-3" value="Data status" onclick="data_status()">
-	
+				<input type="button" class="btn btn-info m-3" value="Data status" onclick="data_status()">	
 				<p id="data_status"></p>
 
 				<input type="button" class="btn btn-info m-3" value="Data atualize" onclick="data_atualize()">
 				<p id="data_atualize"></p>
-		
-				<p id="fill_data_status"></p>
-
 			</div>
 		</div>
 		
@@ -111,7 +103,6 @@
 		<div class="container text-center mt-5">		
 			<input type="button" class="btn btn-success" value="RUN" onclick="run()">
 		</div>
-
 
 		<script src="js/script.js"></script>
     </body>
