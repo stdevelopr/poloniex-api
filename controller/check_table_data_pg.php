@@ -1,3 +1,4 @@
+<!-- Check the existence of the table Data on PostgreSQL database -->
 
 <?php
 ob_start();
