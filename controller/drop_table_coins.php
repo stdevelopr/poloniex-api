@@ -1,10 +1,9 @@
+<!-- Drop MySQL Coins table -->
 <?php 
-
 ob_start();
 include 'connect_db.php';
 ob_end_clean();
 
-//Create a table containing the coins
 $tb = 'DROP TABLE Coins';
 if ($conn->query($tb) === TRUE) {
     echo "Table Coins deleted";
