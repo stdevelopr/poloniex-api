@@ -1,5 +1,5 @@
+<!-- MySQL data status -->
 <?php
-
 ob_start();
 include 'connect_db.php';
 ob_end_clean();
@@ -42,12 +42,11 @@ $sql = 'SELECT * FROM Coins';
 
 $result = $conn->query($sql);  
 
-//atualize the screen
 ob_implicit_flush(true);
 ob_end_flush();
 
-$r=0; //table number of rows
-while($row = $result->fetch_assoc()) {  //the function fetch_assoc() fetch the first element from the collection.
+$r=0; 
+while($row = $result->fetch_assoc()) { 
     	$pair = $row['pair'];
     	$sql = 'SELECT * FROM Data WHERE pair='."'$pair'";
     	$output = $conn->query($sql); 
@@ -58,13 +57,7 @@ while($row = $result->fetch_assoc()) {  //the function fetch_assoc() fetch the f
     	}
     	echo $pair.': ';
     	echo $c.' Entries';
-		echo '<br>';
-		// while($ro = $output->fetch_assoc()){
-		// 	print_r($ro['pair']);
-		// 	echo '<br>';
-		// 	$i++;
-		// 	echo $i;
-		// }
-    	
+		echo '<br>';    	
 }
+
 echo 'Total number of rows:'.$r;
