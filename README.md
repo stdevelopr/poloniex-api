@@ -16,7 +16,7 @@ Verify: https://www.apachefriends.org<br>
 Install Composer Dependency Manager: https://getcomposer.org/<br>
 Clone this repo to your localhost folder, and run: *composer install*<br>
 Create a database named "poloniex" and configure the file connect_db (if running MySQL) or connect_db_pg(if running PostgreSQL) with the server info.<br>
-On your browser open the admin.php file and verify the connection.  
+On your browser open the admin.php file and press the button "check database" verify the connection. If connected successfully you are ready to proceed.
 
 ## Usage
 
@@ -25,3 +25,4 @@ To start using the app you need to create the tables, fill them, and click the r
 To atualize the tables, just click the atualize button, and it will verify the last atualization and atualize the table in a 4h timeframe.<br>
 By default the table start with 150 periods of 4h, and look only for BTC pairs.<br>
 You can change this behaviour in the fill_table_coins and fill_table_data.<br>
+To automate the table atualization you can create a cron-job on your system.
