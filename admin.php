@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="bg-dark text-light" lang="pt-br">
     <head>
-        <title>Poloniex MACD</title>
+        <title>Admin Page</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="shortcut icon" type="image/png" href="images/favicon.png">
 
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
