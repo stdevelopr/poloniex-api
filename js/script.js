@@ -154,6 +154,16 @@ winops = window.open("query_db_plot.php/?pair="+pair, '', 'toolbar=no, location=
 winops.focus();
 }
 
+function plot_pg(pair){
+        var w = 1000;
+        var h = 500;
+        var left = Number((window.innerWidth/2)-(w/2));
+        var tops = Number((window.innerHeight/2)-(h/2));
+
+winops = window.open("query_db_plot_pg.php/?pair="+pair, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+tops+', left='+left);
+winops.focus();
+}
+
 function run(){
 
     if(document.getElementById('mysql').checked){
@@ -162,3 +172,19 @@ function run(){
         window.location.assign(dir+'/controller/loop_table_pg.php');
     }
 }
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip({ trigger: 'click', animation: false});
+  $('[data-toggle="tooltip"]').mouseleave(function(){
+    $(this).tooltip('hide');
+});
+});
