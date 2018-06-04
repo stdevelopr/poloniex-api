@@ -57,7 +57,7 @@ if($actual > $next){
 	if ($result->num_rows > 0) {
 	    while($row = $result->fetch_assoc()) {
 	    	$pair = $row['pair'];
-	    	$url= 'https://poloniex.com/public?command=returnChartData&currencyPair='.$pair.'&start='.$next.'&end='.$next.'&period='.$period;
+	    	$url= 'https://poloniex.com/public?command=returnChartData&currencyPair='.$pair.'&start='.$last.'&end='.$actual.'&period='.$period;
 
 			curl_setopt($ch, CURLOPT_URL,$url);
 			$get=curl_exec($ch);
@@ -87,6 +87,15 @@ if($actual > $next){
 		                // 	 echo '<br>';
 		                // 	 echo '<br>';
 		            }
+
+		            //correct the values of the last entry
+		            if($date==$last){
+		                $actualize_table = "UPDATE Data SET close =".$close.",low=".$low.",high=".$high." WHERE pair='".$pair."' and date_time=".$date;
+					    if($conn->query($actualize_table) === TRUE){
+					    	echo 'Actualizing: '. $pair.' Date_time: '.$date;
+					    	echo '<br>';
+					    }
+					}
 	        	}
 	        }
 	        usleep(250000);
