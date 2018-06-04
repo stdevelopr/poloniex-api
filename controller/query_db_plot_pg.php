@@ -1,3 +1,4 @@
+<!-- Plots the graph for a requested PostgreSQL pair -->
 <?php 
 use LupeCode\phpTraderNative\Trader as Trader;
 
@@ -9,15 +10,11 @@ include 'connect_db_pg.php';
 ob_end_clean();
 
 $pair=$_GET["pair"];
-// echo $pair;
 
 // select all columns from database
-$sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="'.$pair.'"';
-
-// $sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="BTC_AMP"';
+$sql = "SELECT pair, date_time, close, high, low, open FROM Data WHERE pair= '".$pair."' ORDER BY date_time ASC";
 
 $result =pg_query($conn, $sql); 
-print_r(pg_num_rows($result));
 
 if(pg_num_rows($result)>1) {
     while($row = pg_fetch_array($result)) { 
@@ -30,14 +27,6 @@ if(pg_num_rows($result)>1) {
     }
 } else {
     echo "0 results";
-}
-
-
-//Moving Avarage Indicator
-$ma= Trader::ma($close, 100);
-$date_ma = [];
-foreach ($ma as $key => $value) {
-	$date_ma[$key] = $date_time[$key];
 }
 
 $macd_get = Trader::macd($close);
@@ -53,8 +42,8 @@ foreach ($macd as $key => $value) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" href="css/main.css">
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 <!-- Plotly chart will be drawn inside this div -->
@@ -65,8 +54,6 @@ foreach ($macd as $key => $value) {
 	var high= <?php echo json_encode($high); ?>;
 	var low= <?php echo json_encode($low); ?>;
 	var open= <?php echo json_encode($open); ?>;
-	var ma= Object.values(<?php echo json_encode($ma); ?>);
-	var date_ma= Object.values(<?php echo json_encode($date_ma); ?>);
 	var macd = Object.values(<?php echo json_encode($macd); ?>);
 	var macd_sig = Object.values(<?php echo json_encode($macd_sig); ?>);
 	var macd_hist = Object.values(<?php echo json_encode($macd_hist); ?>);
@@ -93,22 +80,7 @@ foreach ($macd as $key => $value) {
 		name: '',
 	};
 
-
-
-	// var trace2= {
-	//     x: date_ma,
-	//     y: ma,
-	//     type: 'scatter',
-	//     xaxis: 'x',
-	//  	yaxis: 'y1',
-	//  	name: 'ma',
-	//  	hoverinfo: 'skip',
-	//  	line: {color:'blue'},
-	//  	textfont:{size:100},
-	//  	// xcalendar: 'julian',
-	//   };
-
-	  	var trace3= {
+	var trace2= {
 	    x: date_macd,
 	    y: macd,
 	    type: 'scatter',
@@ -116,9 +88,9 @@ foreach ($macd as $key => $value) {
 	 	yaxis: 'y2',
 	 	hoverinfo: 'none',
 	 	line:{color:'green'},
-	  };
+	};
 
-	  	 var trace4= {
+	var trace3= {
 	    x: date_macd,
 	    y: macd_sig,
 	    type: 'scatter',
@@ -126,9 +98,9 @@ foreach ($macd as $key => $value) {
 	 	yaxis: 'y2',
 	 	hoverinfo: 'none',
 	 	line:{color:'red'},
-	  };
+	};
 
-	  	var trace5= {
+	var trace4= {
 	    x: date_macd,
 	    y: macd_hist,
 	    type: 'bar',
@@ -137,9 +109,9 @@ foreach ($macd as $key => $value) {
 	 	hoverinfo: 'none',
 	 	marker:{color: macd_hist, colorscale: [[0, 'red'], [1, 'green']], cauto:true},
 
-	  };
+	};
 
-	var data=[trace1, trace3, trace4, trace5];
+	var data=[trace1, trace2, trace3, trace4];
 
 	var layout = {
 	plot_bgcolor: 'black',
@@ -154,7 +126,6 @@ foreach ($macd as $key => $value) {
 	hoverdistance: 4000,
 	xside: 'top plot',
 	xaxis: {domain: [0,1], rangeslider: {visible: false}, ticks:'outside', side: 'bottom', anchor: 'y2', showspickes:true, spikemode: 'toaxis+across+marker', spikecolor:'white', spikedash:'solid', spikesnap:'data', tickangle:0, dtick:20, tickangle:30, tickfont:{size:9}},
-	 // type:'date', tickformat:'%-d/%-m/%Y'
 	yaxis: {domain: [0.5,1],title: 'Price',exponentformat:'none', showline:true},
 	xaxis2: {domain: [0,1],rangeslider: {visible: false},ticks: 'outside',side: 'bottom', anchor: 'y2'},
 	yaxis2: {domain: [0,0.2],title: 'MACD', exponentformat:'none', showticklabels:false, showline:true},
@@ -162,10 +133,6 @@ foreach ($macd as $key => $value) {
 
 
 	var resize= Plotly.plot('graph', data, layout, {displayModeBar: false});
-
-	window.onresize = function() {
-    console.log('ok');
-};
 
 
 </script>
