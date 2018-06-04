@@ -7,12 +7,12 @@ ob_end_clean();
 $time_start = microtime(true);
 
 // Actual Time
-$end = date('U');
+$end = gmdate('U');
 
 // Period to query
 $period = 14400; //4hrs
 
-// Numer of candles to retrieve
+// Number of candles to retrieve
 $n_candles = 150;
 
 $start = $end - $period*$n_candles;
