@@ -136,11 +136,11 @@ function data_status(){
     xmlhttp.send();
 }
 
-function data_atualize(){
+function data_update(){
     if(document.getElementById('mysql').checked){
-        window.location.assign(dir+'/controller/data_atualize.php');
+        window.location.assign(dir+'/controller/data_update.php');
     }else{
-        window.location.assign(dir+'/controller/data_atualize_pg.php');
+        window.location.assign(dir+'/controller/data_update_pg.php');
     }
 }
 
