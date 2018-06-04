@@ -96,8 +96,8 @@
 				<input type="button" class="btn btn-info m-3" value="Data status" onclick="data_status()">	
 				<p id="data_status"></p>
 
-				<input type="button" class="btn btn-info m-3" value="Data atualize" onclick="data_atualize()">
-				<p id="data_atualize"></p>
+				<input type="button" class="btn btn-info m-3" value="Data update" onclick="data_update()">
+				<p id="data_update"></p>
 			</div>
 		</div>
 		
