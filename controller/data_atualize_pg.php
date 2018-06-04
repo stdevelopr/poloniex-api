@@ -57,7 +57,7 @@ if($actual > $next){
 	if (pg_num_rows($result)>1) {
 	    while($row = pg_fetch_array($result)) { 
 	    	$pair = $row['pair'];
-	    	$url= 'https://poloniex.com/public?command=returnChartData&currencyPair='.$pair.'&start='.$next.'&end='.$next.'&period='.$period;
+	    	$url= 'https://poloniex.com/public?command=returnChartData&currencyPair='.$pair.'&start='.$last.'&end='.$actual.'&period='.$period;
 			curl_setopt($ch, CURLOPT_URL,$url);
 			$get=curl_exec($ch);
 
@@ -68,7 +68,6 @@ if($actual > $next){
             	if($date!=0){
             		$atualize = true;
 		            $date = $value['date'];
-		            // echo $pair.':'.$date;
 		            $high = $value['high'];
 		            $low = $value['low'];
 		            $open = $value['open'];
@@ -89,6 +88,15 @@ if($actual > $next){
 		                // 	 echo '<br>';
 		                // }
 	                }
+	                //correct the values of the last entry
+	                 if($date==$last){
+		                $actualize_table = "UPDATE Data SET close =".$close.",low=".$low.",high=".$high." WHERE pair='".$pair."' and date_time=".$date;
+					    $add = pg_query($conn, $actualize_table);
+					    if($add){
+					    	echo 'Actualizing: '. $pair.' Date_time: '.$date;
+					    	echo '<br>';
+					    }
+					}
 	        	}
 	        }
 	        usleep(250000);
