@@ -1,4 +1,4 @@
-<!-- plots the graph for a requested MYSQL pair -->
+<!-- Plots the graph for a requested MYSQL pair -->
 <?php 
 use LupeCode\phpTraderNative\Trader as Trader;
 
@@ -29,14 +29,6 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
-
-//Moving Avarage Indicator
-$ma= Trader::ma($close, 100);
-$date_ma = [];
-foreach ($ma as $key => $value) {
-	$date_ma[$key] = $date_time[$key];
-}
-
 $macd_get = Trader::macd($close);
 $macd = $macd_get['MACD'];
 $macd_sig = $macd_get['MACDSignal'];
@@ -64,8 +56,6 @@ foreach ($macd as $key => $value) {
 	var high= <?php echo json_encode($high); ?>;
 	var low= <?php echo json_encode($low); ?>;
 	var open= <?php echo json_encode($open); ?>;
-	var ma= Object.values(<?php echo json_encode($ma); ?>);
-	var date_ma= Object.values(<?php echo json_encode($date_ma); ?>);
 	var macd = Object.values(<?php echo json_encode($macd); ?>);
 	var macd_sig = Object.values(<?php echo json_encode($macd_sig); ?>);
 	var macd_hist = Object.values(<?php echo json_encode($macd_hist); ?>);
