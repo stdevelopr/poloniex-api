@@ -38,3 +38,52 @@ body{
 	background-repeat: no-repeat;
 	background-position: center right;
 }
+
+#header{
+	position: relative;
+	height: 80px;
+	background: black;
+	margin: 0;
+
+}
+#header img{
+	position: relative;
+	max-height: 50px;
+	/*margin-left: 20px !important;*/
+}
+
+#footer_p{
+	position: relative;
+	height: 300px;
+	margin: 0;
+	color: white;
+	background-image: url('../images/gd.png');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#footer_p img{
+	height: 50px;
+
+}
+
+#fork img{
+	height: 100px;
+}
+
+#fork{
+	position: relative;
+
+}
+
+.support_coin{
+	height: 50px !important;
+}
+
+#table_support{
+	
+}
+
+#tks h3{
+background-color:rgba(0, 0, 0, 0.5);
+}
