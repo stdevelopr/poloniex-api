@@ -1,4 +1,4 @@
-<!-- Atualize MySQL data table -->
+<!-- Update MySQL data table -->
 
 <?php 
 ob_start();
@@ -92,7 +92,7 @@ if($actual > $next){
 		            if($date==$last){
 		                $actualize_table = "UPDATE Data SET close =".$close.",low=".$low.",high=".$high." WHERE pair='".$pair."' and date_time=".$date;
 					    if($conn->query($actualize_table) === TRUE){
-					    	echo 'Actualizing: '. $pair.' Date_time: '.$date;
+					    	echo 'Updating: '. $pair.' Date_time: '.$date;
 					    	echo '<br>';
 					    }
 					}
