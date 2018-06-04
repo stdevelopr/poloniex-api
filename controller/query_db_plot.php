@@ -1,3 +1,4 @@
+<!-- plots the graph for a requested MYSQL pair -->
 <?php 
 use LupeCode\phpTraderNative\Trader as Trader;
 
@@ -10,7 +11,7 @@ ob_end_clean();
 
 $pair=$_GET["pair"];
 
-$sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="'.$pair.'"';
+$sql = 'SELECT pair, date_time, close, high, low, open FROM Data WHERE pair="'.$pair.'" ORDER BY date_time ASC';
 
 $result = $conn->query($sql);  
 
@@ -91,22 +92,7 @@ foreach ($macd as $key => $value) {
 		name: '',
 	};
 
-
-
-	// var trace2= {
-	//     x: date_ma,
-	//     y: ma,
-	//     type: 'scatter',
-	//     xaxis: 'x',
-	//  	yaxis: 'y1',
-	//  	name: 'ma',
-	//  	hoverinfo: 'skip',
-	//  	line: {color:'blue'},
-	//  	textfont:{size:100},
-	//  	// xcalendar: 'julian',
-	//   };
-
-	  	var trace3= {
+	var trace2= {
 	    x: date_macd,
 	    y: macd,
 	    type: 'scatter',
@@ -114,9 +100,9 @@ foreach ($macd as $key => $value) {
 	 	yaxis: 'y2',
 	 	hoverinfo: 'none',
 	 	line:{color:'green'},
-	  };
+	};
 
-	  	 var trace4= {
+	var trace3= {
 	    x: date_macd,
 	    y: macd_sig,
 	    type: 'scatter',
@@ -124,9 +110,9 @@ foreach ($macd as $key => $value) {
 	 	yaxis: 'y2',
 	 	hoverinfo: 'none',
 	 	line:{color:'red'},
-	  };
+	};
 
-	  	var trace5= {
+	var trace4= {
 	    x: date_macd,
 	    y: macd_hist,
 	    type: 'bar',
@@ -135,9 +121,9 @@ foreach ($macd as $key => $value) {
 	 	hoverinfo: 'none',
 	 	marker:{color: macd_hist, colorscale: [[0, 'red'], [1, 'green']], cauto:true},
 
-	  };
+	};
 
-	var data=[trace1, trace3, trace4, trace5];
+	var data=[trace1, trace2, trace3, trace4];
 
 	var layout = {
 	plot_bgcolor: 'black',
@@ -152,7 +138,6 @@ foreach ($macd as $key => $value) {
 	hoverdistance: 4000,
 	xside: 'top plot',
 	xaxis: {domain: [0,1], rangeslider: {visible: false}, ticks:'outside', side: 'bottom', anchor: 'y2', showspickes:true, spikemode: 'toaxis+across+marker', spikecolor:'white', spikedash:'solid', spikesnap:'data', tickangle:0, dtick:20, tickangle:30, tickfont:{size:9}},
-	 // type:'date', tickformat:'%-d/%-m/%Y'
 	yaxis: {domain: [0.5,1],title: 'Price',exponentformat:'none', showline:true},
 	xaxis2: {domain: [0,1],rangeslider: {visible: false},ticks: 'outside',side: 'bottom', anchor: 'y2'},
 	yaxis2: {domain: [0,0.2],title: 'MACD', exponentformat:'none', showticklabels:false, showline:true},
@@ -160,11 +145,6 @@ foreach ($macd as $key => $value) {
 
 
 	var resize= Plotly.plot('graph', data, layout, {displayModeBar: false});
-
-	window.onresize = function() {
-    console.log('ok');
-};
-
 
 </script>
 </body>
